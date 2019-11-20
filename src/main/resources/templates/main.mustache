@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<body>
+
+<div>
+    <form method="post">
+        <input type="text" name="name" placeholder="Name:"/>
+        <input type="text" name="phone" placeholder="Phone:"/>
+        <input type="text" name="region" placeholder="Region:"/>
+        <div>
+            <input type="radio" id="typeManager" name="employeeType" value="Manager">
+            <label for="typeManager">Manager</label>
+            <input type="radio" id="typeDeveloper" name="employeeType" value="Developer">
+            <label for="typeDeveloper">Developer</label>
+            <input type="radio" id="typeBooker" name="employeeType" value="Booker">
+            <label for="typeManager">Booker</label>
+
+        </div>        <button type="submit">Add</button>
+    </form>
+</div>
+
+<div>Employee list</div>
+<form method="post" action="filter">
+    <input type="text" name="filter" placeholder="Manager, Developer or Booker"/>
+    <button type="submit">Find</button>
+</form>
+{{#employees}}
+    <div>
+        <b>{{id}}</b>
+        <span>{{name}}</span>
+        <span>{{phone}}</span>
+        <span>{{region}}</span>
+        <strong>{{employeeTypeName}}</strong>
+    </div>
+{{/employees}}
+
+</body>
+</html>
