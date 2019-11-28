@@ -1,8 +1,12 @@
 package com.profitsoft.sinelnikov.domain;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.util.Objects;
 
+@Component
 @Entity
 @Table(name = "employees")
 public class Employee {
@@ -12,7 +16,7 @@ public class Employee {
     private Long id;
 
     @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name="type", referencedColumnName = "type_id",insertable=false, updatable=false)
+    @JoinColumn(name="type_id", referencedColumnName = "type_id",insertable=false, updatable=false)
     private EmployeeType employeeType;
 
     @Column(name = "name")
@@ -51,11 +55,11 @@ public class Employee {
         this.id = id;
     }
 
-    public EmployeeType getEmployeeType() {
+    public EmployeeType getType() {
         return employeeType;
     }
 
-    public void setEmployeeType(EmployeeType employeeType) {
+    public void setType(EmployeeType employeeType) {
         this.employeeType = employeeType;
     }
 

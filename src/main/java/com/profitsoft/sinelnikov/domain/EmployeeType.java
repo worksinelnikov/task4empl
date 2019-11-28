@@ -1,10 +1,14 @@
 package com.profitsoft.sinelnikov.domain;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+@Component
 @Entity
 @Table(name = "employee_types")
 public class EmployeeType {
@@ -16,15 +20,15 @@ public class EmployeeType {
     @Column(name = "type_name")
     private String type;
 
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Employee> employees;
+    @OneToMany(mappedBy = "employeeType", fetch = FetchType.EAGER)
+    private List<Employee> employees;
 
     public EmployeeType() {
     }
 
     public EmployeeType(String type) {
         this.type = type;
-        this.employees = new HashSet<>();
+        this.employees = new ArrayList<>();
     }
 
     public Long getId() {
@@ -43,11 +47,11 @@ public class EmployeeType {
         this.type = type;
     }
 
-    public Set<Employee> getEmployees() {
+    public List<Employee> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(Set<Employee> employees) {
+    public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
 
