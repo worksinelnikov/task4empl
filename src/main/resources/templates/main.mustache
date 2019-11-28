@@ -8,22 +8,22 @@
         <input type="text" name="phone" placeholder="Phone:"/>
         <input type="text" name="region" placeholder="Region:"/>
         <div>
-            <input type="radio" id="typeManager" name="employeeType" value="Manager">
+            <input type="radio" id="typeManager" name="type" value="Manager">
             <label for="typeManager">Manager</label>
-            <input type="radio" id="typeDeveloper" name="employeeType" value="Developer">
+            <input type="radio" id="typeDeveloper" name="type" value="Developer">
             <label for="typeDeveloper">Developer</label>
-            <input type="radio" id="typeBooker" name="employeeType" value="Booker">
-            <label for="typeManager">Booker</label>
-
-        </div>        <button type="submit">Add</button>
+            <input type="radio" id="typeBooker" name="type" value="Booker">
+            <label for="typeBooker">Booker</label>
+        </div>
+        <button type="submit">Add</button>
     </form>
 </div>
 
 <div>Employee list</div>
-<form method="post" action="filter">
-    <input type="text" name="filter" placeholder="Manager, Developer or Booker"/>
-    <button type="submit">Find</button>
-</form>
+<!--<form method="post" action="filter">-->
+    <!--<input type="text" name="filter" placeholder="Manager, Developer or Booker"/>-->
+    <!--<button type="submit">Find</button>-->
+<!--</form>-->
 {{#employees}}
     <div>
         <b>{{id}}</b>
