@@ -5,6 +5,7 @@ import com.profitsoft.sinelnikov.domain.Employee;
 import java.util.List;
 
 public interface EmployeeDAO extends AbstractDAO<Employee, Long> {
+
     List<Employee> getAll();
 
     void update(Employee entity);

@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface AbstractDAO<E, K extends Number> {
+
     public abstract List<E> getAll() throws SQLException;
 
     public abstract void update(E entity) throws SQLException;

@@ -5,21 +5,22 @@ import com.profitsoft.sinelnikov.domain.Employee;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Service
 public class EmployeeService extends SessionUtil implements EmployeeDAO {
 
     @Override
+    @Transactional
     public List<Employee> getAll() {
-        openTransactionSession();
-        String sql = "SELECT * FROM EMPLOYEE";
-        Session session = getSession();
-        Query query = session.createNativeQuery(sql).addEntity(Employee.class);
-        List<Employee> employeeList = query.list();
-        closeTransactionSession();
-        return employeeList;
+        CriteriaBuilder criteriaBuilder = getSession().getCriteriaBuilder();
+        CriteriaQuery<Employee> query = criteriaBuilder.createQuery(Employee.class);
+        return getSession().createQuery(query).list();
     }
 
     @Override
@@ -31,15 +32,13 @@ public class EmployeeService extends SessionUtil implements EmployeeDAO {
     }
 
     @Override
+    @Transactional
     public Employee getEntityById(Long id) {
-        openTransactionSession();
-        String sql = "SELECT * FROM EMPLOYEE WHERE ID = :id";
-        Session session = getSession();
-        Query query = session.createNativeQuery(sql).addEntity(Employee.class);
-        query.setParameter("id", id);
-        Employee employee = (Employee) query.getSingleResult();
-        closeTransactionSession();
-        return employee;
+        CriteriaBuilder criteriaBuilder = getSession().getCriteriaBuilder();
+        CriteriaQuery<Employee> query = criteriaBuilder.createQuery(Employee.class);
+        Root<Employee> root = query.from(Employee.class);
+        query.where(criteriaBuilder.equal(root.get("id"), id));
+        return getSession().createQuery(query).uniqueResult();
     }
 
     @Override
